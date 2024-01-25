@@ -92,4 +92,5 @@ var GildedRose = /** @class */ (function () {
     return GildedRose;
 }());
 exports.GildedRose = GildedRose;
+exports.updateQuality = updateQuality;
 //# sourceMappingURL=gilded-rose.js.map
