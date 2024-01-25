@@ -20,6 +20,10 @@ export class GildedRose {
   // added switch statement and extracted item quality updates as separate methods
   updateQuality(): Array<Item> {
     for (const item of this.items) {
+      if (item.name.includes("Conjured")) {
+        this.updateConjured(item);
+      }
+
       switch (item.name) {
         case "Aged Brie":
           this.updateAgedBrie(item);
@@ -31,11 +35,6 @@ export class GildedRose {
 
         case "Sulfuras, Hand of Ragnaros":
           break;
-
-        case "Conjured": {
-          this.updateConjured(item);
-          break;
-        }
 
         default:
           this.updateRegularItem(item);
@@ -103,13 +102,9 @@ export class GildedRose {
   }
 
   private handleExpiredItem(item: Item): void {
-    if (this.isExpired(item)) {
-      if (item.name === "Backstage passes to a TAFKAL80ETC concert") {
-        item.quality = 0;
-      } else if (item.name !== "Sulfuras, Hand of Ragnaros") {
+    if (this.isExpired(item) && item.name !== "Sulfuras, Hand of Ragnaros") {
         this.decreaseQuality(item);
       }
     }
-  }
-
+    
 }
