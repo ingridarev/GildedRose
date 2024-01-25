@@ -14,6 +14,32 @@ const items = [
   new Item("Backstage passes to a TAFKAL80ETC concert", 15, 40),
 ];
 
-const gildedRoseInstance = new GildedRose(items);
-gildedRoseInstance.updateQuality();
-console.log(gildedRoseInstance.items);
+class GildedRoseShop {
+  constructor(items) {
+    this.gildedRoseInstance = new GildedRose(items);
+    this.items = items;
+  }
+
+  //making api requests and checking the answers
+  async makeApiRequest() {
+    const endpoint = "https://yesno.wtf/api";
+    const positiveResponses = [];
+
+    const fetch = (await import("node-fetch")).default;
+
+    const response = await fetch(endpoint);
+
+    const json = await response.json();
+    const answer = json.answer;
+    console.log("answer : ", answer);
+
+
+    if (answer === "yes") {
+      positiveResponses.push(answer);
+      console.log("positiveResponses:", positiveResponses)
+    }
+  }
+}
+
+const gildedRoseShopInstance = new GildedRoseShop(items);
+gildedRoseShopInstance.makeApiRequest();
